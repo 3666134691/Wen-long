@@ -181,10 +181,10 @@
       <tr><td>商城</td><td><code>!shop</code></td><td>随机商品，三种支付方式</td></tr>
       <tr><td>玩家传送</td><td><code>!gps</code></td><td>列出在线玩家并 TP 过去</td></tr>
       <tr><td>个人标点</td><td><code>!point</code></td><td>最多 5 个，跟随存档，可删</td></tr>
-      <tr><td>等级系统</td><td><code>!level</code></td><td>9 级 / 10 级升级</td></tr>
+      <tr><td>升级系统</td><td><code>!level</code></td><td>一套 10 级，机型=等级</td></tr>
       <tr><td>新手指南</td><td><code>!book</code> / <code>!help</code></td><td>发放指南书，右键打开 4 页说明</td></tr>
     </table>
-    <div class="note">重叠功能已改名区分：手机的叫「GPS 导航 / 机型升级」，GaoLLC 的叫「玩家传送 / 等级系统」。</div>
+    <div class="note">重叠功能已改名区分：手机的叫「GPS 导航」，GaoLLC 的叫「玩家传送」。升级系统只有一套（机型=等级），不再分「机型升级」和「等级系统」。</div>
   </section>
 
   <section id="s4">
@@ -192,27 +192,26 @@
     <h3>基础手机（3×3 工作台）</h3>
     <p>四角羊毛（任意颜色）、上下铁锭、左右红石粉、正中钻石块。</p>
 
-    <h3>十代机型升级路线</h3>
+    <h3>升级系统只有一套：机型 = 等级，共 10 级</h3>
     <div class="flow">
-      <span class="node">I</span><span class="arr">→</span>
-      <span class="node">II</span><span class="arr">→</span>
-      <span class="node">III</span><span class="arr">→</span>
-      <span class="node">IV</span><span class="arr">→</span>
-      <span class="node">V</span><span class="arr">→</span>
-      <span class="node">VI</span><span class="arr">→</span>
-      <span class="node">VII</span><span class="arr">→</span>
-      <span class="node">VIII</span><span class="arr">→</span>
-      <span class="node">X</span><span class="arr">→</span>
-      <span class="node">Pro Max</span>
+      <span class="node">1级 I</span><span class="arr">→</span>
+      <span class="node">2级 II</span><span class="arr">→</span>
+      <span class="node">3级 III</span><span class="arr">→</span>
+      <span class="node">4级 IV</span><span class="arr">→</span>
+      <span class="node">5级 V</span><span class="arr">→</span>
+      <span class="node">6级 VI</span><span class="arr">→</span>
+      <span class="node">7级 VII</span><span class="arr">→</span>
+      <span class="node">8级 VIII</span><span class="arr">→</span>
+      <span class="node">9级 X</span><span class="arr">→</span>
+      <span class="node">10级 Pro Max</span>
     </div>
-    <p>举报次数随之提升：10 → 20 → 30 → 50 → 50 → 60 → 70 → 80 → 90 → 无限</p>
-
-    <h3>等级系统（与机型升级是两套）</h3>
     <ul>
-      <li><strong>9 级</strong>：背包备 8 个钻石，脚下地面放 1 个信标（代表手机），输入 <code>!level up</code> 检测，消耗 8 钻石升级。</li>
-      <li><strong>10 级（满级）</strong>：消耗 1 个下界之星。</li>
+      <li><strong>1-8 级（工作台合成）</strong>：旧手机 + 材料无序合成，依次到 I→II→…→VIII。</li>
+      <li><strong>9 级（智能手机 X）</strong>：背包备 8 个钻石，脚下地面放 1 个信标（代表手机），输入 <code>!level up</code> 检测，消耗 8 钻石并<strong>发放手机 X</strong>。</li>
+      <li><strong>10 级（Pro Max 满级）</strong>：背包备 1 个下界之星，<code>!level up</code> 检测，消耗后<strong>发放 Pro Max</strong>，举报无限。</li>
     </ul>
-    <div class="note">钻石和手机都是物品、无法摆在地面，所以"8 钻石围圈 + 中间放手机"实现为"背包 8 钻石 + 脚下信标代表手机"。</div>
+    <p>举报次数随等级提升：10 → 20 → 30 → 50 → 50 → 60 → 70 → 80 → 90 → 无限，升级后立即生效。用 <code>!level</code> 查看当前机型与等级。</p>
+    <div class="note">钻石和手机都是物品、无法摆在地面，所以"8 钻石围圈 + 中间放手机"实现为"背包 8 钻石 + 脚下信标代表手机"。机型升级和等级系统已合并为同一套，不再是两套。</div>
   </section>
 
   <section id="s5">
