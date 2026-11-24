@@ -1,51 +1,274 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>页面跳转中</title>
-  <meta http-equiv="refresh" content="0;url=https://www.bilibili.com/video/BV1GJ411x7h7/">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-    }
-    #fallback {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      text-align: center;
-      color: #333;
-    }
-    #fallback a {
-      color: #00a1d6;
-      text-decoration: none;
-      font-size: 16px;
-    }
-    #fallback a:hover { text-decoration: underline; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC智能手机 + GaoLLC Workshop · 更新汇总</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2230; --ink:#e6edf3; --muted:#8b949e;
+    --blue:#58a6ff; --cyan:#39c5cf; --gold:#e3b341; --red:#f85149; --green:#3fb950;
+    --line:#30363d; --shadow:0 8px 28px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:linear-gradient(160deg,#0d1117 0%,#11161f 55%,#0d1117 100%);
+    color:var(--ink);font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;line-height:1.7;}
+  .wrap{max-width:1040px;margin:0 auto;padding:36px 22px 80px;}
+
+  header{position:relative;overflow:hidden;background:linear-gradient(135deg,#1b2a4a,#12303a);
+    border:1px solid var(--line);border-radius:20px;padding:34px 38px;box-shadow:var(--shadow);}
+  header:after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;
+    background:radial-gradient(circle,rgba(88,166,255,.25),transparent 70%);}
+  .eyebrow{font-size:12px;letter-spacing:3px;color:var(--cyan);font-weight:700;}
+  h1{font-size:32px;margin:8px 0 6px;letter-spacing:.5px;}
+  .sub{color:var(--muted);font-size:15px;}
+  .ver-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+  .ver{background:var(--green);color:#06210e;font-weight:800;font-size:13px;padding:4px 14px;border-radius:20px;}
+  .chip{background:rgba(255,255,255,.07);border:1px solid var(--line);font-size:12px;
+    padding:4px 12px;border-radius:20px;color:var(--muted);}
+  .date{color:var(--muted);font-size:13px;margin-top:14px;}
+
+  nav{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:6px;background:rgba(13,17,23,.92);
+    backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-top:20px;}
+  nav a{color:var(--muted);text-decoration:none;font-size:13px;padding:5px 11px;border-radius:8px;}
+  nav a:hover{background:var(--panel2);color:var(--blue);}
+
+  section{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:26px 30px;margin-top:20px;box-shadow:0 4px 18px rgba(0,0,0,.18);}
+  h2{font-size:20px;margin:0 0 16px;padding-bottom:12px;border-bottom:2px solid var(--line);
+    display:flex;align-items:center;gap:12px;}
+  h2 .num{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#04121f;font-size:12px;
+    border-radius:8px;padding:3px 10px;font-weight:800;}
+  h3{font-size:15px;margin:20px 0 8px;color:var(--cyan);}
+  p{margin:8px 0;} ul{margin:8px 0;padding-left:22px;} li{margin:6px 0;}
+  strong{color:#fff;}
+  code{background:#0b0f14;border:1px solid var(--line);color:var(--gold);
+    padding:1px 7px;border-radius:5px;font-size:13px;font-family:Consolas,monospace;}
+
+  .tag{font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px;vertical-align:middle;}
+  .t-new{background:rgba(63,185,80,.16);color:var(--green);}
+  .t-chg{background:rgba(227,179,65,.16);color:var(--gold);}
+  .t-fix{background:rgba(248,81,73,.16);color:var(--red);}
+
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;}
+  th{background:var(--panel2);color:var(--blue);font-weight:700;}
+  tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px;}
+  .card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+  .card h4{margin:0 0 6px;font-size:15px;color:var(--blue);}
+  .card p{margin:4px 0;font-size:13px;color:var(--muted);}
+
+  .note{background:rgba(227,179,65,.09);border-left:4px solid var(--gold);padding:12px 16px;
+    border-radius:8px;font-size:13px;color:#e8cf94;margin-top:14px;}
+  .ok{background:rgba(63,185,80,.09);border-left:4px solid var(--green);padding:12px 16px;
+    border-radius:8px;font-size:13px;color:#a5e7b0;margin-top:14px;}
+
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px;}
+  .flow .node{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:8px 13px;font-size:13px;}
+  .flow .arr{color:var(--cyan);font-weight:800;}
+
+  .coinLine{display:flex;align-items:center;gap:14px;margin:14px 0;}
+  .coinLine img{width:64px;height:64px;image-rendering:pixelated;border:1px solid var(--line);border-radius:8px;background:#0b0f14;}
+  .coinLine div{font-size:13px;color:var(--muted);}
+
+  .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line);}
+  .bar{height:8px;background:var(--panel2);border-radius:6px;overflow:hidden;margin-top:8px;}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));}
+</style>
 </head>
 <body>
-  <div id="fallback">
-    <div>
-      <p>页面未能自动跳转，请<a id="manualLink" href="https://www.bilibili.com/video/BV1GJ411x7h7/">点击这里手动跳转</a>。</p>
-    </div>
-  </div>
+<div class="wrap">
 
-  <script>
-    var target = 'https://www.bilibili.com/video/BV1GJ411x7h7/';
-    // 静默跳转，不产生历史记录
-    try { location.replace(target); } catch (e) {}
-    // 等待 2 秒，若页面仍停留则显示手动跳转链接
-    setTimeout(function () {
-      var manual = document.getElementById('manualLink');
-      manual.href = target;
-      document.getElementById('fallback').style.display = 'flex';
-    }, 2000);
-  </script>
+  <header>
+    <div class="eyebrow">MINECRAFT 中国版 · ADDON · 投稿组件</div>
+    <h1>MC智能手机 + GaoLLC Workshop</h1>
+    <div class="sub">把智能手机装进方块世界：识别、举报、导航、商城、炎币经济、玩家传送、等级升级——一个界面全搞定。</div>
+    <div class="ver-row">
+      <span class="ver">当前 V0.4.8</span>
+      <span class="chip">12 物品</span>
+      <span class="chip">21 配方</span>
+      <span class="chip">15 功能按钮</span>
+      <span class="chip">纯 Python + 自定义 UI</span>
+      <span class="chip">无后端 · 无联网</span>
+    </div>
+    <div class="date">更新汇总整理：2026-11-24 · 行为包 + 资源包（Mod SDK）</div>
+  </header>
+
+  <nav>
+    <a href="#s1">本次更新</a>
+    <a href="#s2">炎币经济</a>
+    <a href="#s3">功能总览</a>
+    <a href="#s4">合成与升级</a>
+    <a href="#s5">投稿与排错</a>
+    <a href="#s6">技术说明</a>
+  </nav>
+
+  <section id="s1">
+    <h2><span class="num">01</span>本次更新 <span class="tag t-new">V0.4.8</span></h2>
+    <p>基于你确认的 V0.4.7.1 更新清单，再做了一次经济系统重构。以下为本版改动：</p>
+
+    <h3>炎币改为可交易实体货币 <span class="tag t-chg">机制变更</span></h3>
+    <ul>
+      <li>炎币从"存档数字"变成<strong>真正的物品</strong>：背包里的炎币票券数量就是余额。</li>
+      <li>可以<strong>玩家之间交易</strong>、丢地上、死亡掉落——都真实生效。</li>
+      <li>图标用你发的<strong>原图</strong>（蓝色票券 + 左下角代币）缩放到 16×16，不重画。</li>
+      <li>因官方堆叠上限 64 不可改，单个炎币定得更值钱：<strong>1 币 ≈ 2 铁锭</strong>。</li>
+    </ul>
+
+    <h3>兑换改为工作台合成 <span class="tag t-new">新增</span></h3>
+    <p>新增 10 条工作台兑换配方，任意摆放即可合成炎币，聊天命令 <code>!coin</code> 只用于查询余额。</p>
+
+    <h3>商城价格整体下调 <span class="tag t-chg">调整</span></h3>
+    <p>配合炎币升值，商品价格降为旧版约 1/5，保证经济可循环。</p>
+
+    <div class="note">这些改动来自你 11-24 的确认：图标保留代币、比例照定、炎币可交易但死亡会掉。16×16 下原图细节会偏糊，先按此版试用，效果不好再调。</div>
+  </section>
+
+  <section id="s2">
+    <h2><span class="num">02</span>炎币经济详解</h2>
+    <div class="coinLine">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADKklEQVR4nG2T3U9bBRjGf+f7tEDpB/1AGGuZrDSMNcgGbrphwmI2d8HluPNKE+Of4IVX/gcmeuEu5o1eGcMuFhYWFhnLjLohJq5OVvpBaxEKLS09Lef0HFMWjRe8d+/7PO+b5+L9CY7jOJxQbdOkabRwBAddU5FV7SQb8v8b226zXdxl7ck6qedpKnu147nf72FkNMbEdJLQQABREhEQjjWhk8DBodlo8vjBLyx+u0DhoIIltZEUEUmWsSwb07AJ9wW5NX+T6ZlJVF1DEIRXBwyjxbOlR9zdrnO3sM+VVp5GfoNavYokyWguF25XD7V9k2alxYcfvM/s3BUUVUHEgY1nv3N7dY2zFxLMzoyjT8+wN/UOkbFJLEWnVqmSz6URVYPgqV7ufP0Nz3/7k05yuVk/ZGnlJ4TkBZZNH8Uf7qO4dabGxvAORyExSXm/QvIgRymfQREE1C6JxYWHjCSGkUvZAruqxtylc+TqR3zyMo27uEkzn2XuxjV8iTGkX58Q0sMEwxEaRgOr0ab0skTjrx3E0kGNictJ9n58iJFeJ9rlwhWLcxR7A/n0KLf3AhC/yFEkRvnIxt3VxelEjEK9yKeLj5FzhSzpnTJql4cXlkkgeZEpf4SFlo87BwrveZoMePwEh0KERsYoHxrsrK+wYStsB8eRz42Mcu+7z3E8Ci80D92Dw7SsGgfu8+QqAvNRkZjuENfbZGyFLc3H8oNVNgMJvjwfRh4Y7Ofd+Xn2fF6uim2CXh8NQURPZ/nq6RJr0iiXh3oQHZli1WarkGWzesj0zRlm/TaypCskJ89SQscyDXYrNZLDp/gjleLG0+/JZF7ji9eHmY1HUb1+dleW8b51nY/iOgFfL7Ksqoi2hSLDdu0QVZLw97jQNJmQW6K/UYTUPmulDJpLZ/XefaIff8bVM2EcRUOwLNPZqdXJl2uYNmQLZcqFLX5efoRZ3UdUZFyyhlE3CPm7iSRijL99ievTE3QgkDuvGvJ6iXg81BsGfe0Wqb8l7KEo1UofgijS6+lmJBEl+WaS/sEwHY46CP/HwkmYmlabVqNJx6ppKoqmHi/9axeFVzT+AyUAUOcvY8uJAAAAAElFTkSuQmCC" alt="炎币图标">
+      <div><strong>炎币</strong> <code>phone:yan_coin</code><br>你发的原图（含左下角代币）缩放的 16×16 像素图标，可堆叠 64。</div>
+    </div>
+
+    <h3>工作台兑换比例</h3>
+    <table>
+      <tr><th>材料</th><th>→ 炎币</th><th>材料</th><th>→ 炎币</th></tr>
+      <tr><td>9 泥土</td><td><strong>1</strong></td><td>2 铁锭</td><td><strong>1</strong></td></tr>
+      <tr><td>9 石头</td><td><strong>1</strong></td><td>1 金锭</td><td><strong>2</strong></td></tr>
+      <tr><td>9 圆石</td><td><strong>1</strong></td><td>1 钻石</td><td><strong>10</strong></td></tr>
+      <tr><td>9 沙子</td><td><strong>1</strong></td><td>1 绿宝石</td><td><strong>12</strong></td></tr>
+      <tr><td>9 原木</td><td><strong>2</strong></td><td>1 下界之星</td><td><strong>50</strong></td></tr>
+    </table>
+
+    <h3>商城价格（每游戏日可刷新 5 次）</h3>
+    <table>
+      <tr><th>低级商品</th><th>价格</th><th>高级商品</th><th>价格</th></tr>
+      <tr><td>面包 ×16 / 火把 ×32</td><td>1</td><td>钻石 ×2</td><td>10</td></tr>
+      <tr><td>皮革 / 线 / 羽毛 ×16</td><td>1</td><td>金块 ×4</td><td>8</td></tr>
+      <tr><td>圆石 ×64</td><td>1</td><td>钻石块 ×1 / 信标 ×1</td><td>40</td></tr>
+      <tr><td>铁锭 ×8</td><td>3</td><td>附魔金苹果 ×1</td><td>35</td></tr>
+      <tr><td></td><td></td><td>末影珍珠 ×8 / 下界之星 ×1</td><td>18 / 50</td></tr>
+    </table>
+
+    <h3>三种支付方式</h3>
+    <div class="grid">
+      <div class="card"><h4>炎币支付</h4><p><code>!shop 序号</code><br>直接扣背包里的炎币票券。</p></div>
+      <div class="card"><h4>单项物品支付</h4><p><code>!shop 序号 i材料序号</code><br>用一种材料按比例抵扣，多付找零。</p></div>
+      <div class="card"><h4>组合支付</h4><p><code>!shop 序号 mix</code><br>多种材料凑够货款，多退少补。</p></div>
+    </div>
+    <div class="ok">支付采用"先规划后扣除"：所有物品扣成功才发货，中途失败原样退还，不会丢东西。</div>
+  </section>
+
+  <section id="s3">
+    <h2><span class="num">03</span>功能总览（15 按钮）</h2>
+    <h3>手机原版（左列）</h3>
+    <table>
+      <tr><th>功能</th><th>说明</th></tr>
+      <tr><td>物品识别</td><td>准星对准方块，显示名称与 Minecraft ID（如 minecraft:grass）</td></tr>
+      <tr><td>举报</td><td>清除脚下 10 格内同类方块（只清被举报的那种），每台手机有次数上限</td></tr>
+      <tr><td>远程背包</td><td>文字形式查看背包物品清单</td></tr>
+      <tr><td>GPS 导航</td><td>记录坐标 / 前往 / 设为家 / 回家</td></tr>
+      <tr><td>商城入口</td><td>快捷进入炎币商城（天气功能已移除，改为此处）</td></tr>
+    </table>
+
+    <h3>GaoLLC 附加（右列，由 JS 版用 Python 重写）</h3>
+    <table>
+      <tr><th>功能</th><th>命令</th><th>说明</th></tr>
+      <tr><td>炎币</td><td><code>!coin</code></td><td>查询余额（兑换在工作台）</td></tr>
+      <tr><td>商城</td><td><code>!shop</code></td><td>随机商品，三种支付方式</td></tr>
+      <tr><td>玩家传送</td><td><code>!gps</code></td><td>列出在线玩家并 TP 过去</td></tr>
+      <tr><td>个人标点</td><td><code>!point</code></td><td>最多 5 个，跟随存档，可删</td></tr>
+      <tr><td>等级系统</td><td><code>!level</code></td><td>9 级 / 10 级升级</td></tr>
+      <tr><td>新手指南</td><td><code>!book</code> / <code>!help</code></td><td>发放指南书，右键打开 4 页说明</td></tr>
+    </table>
+    <div class="note">重叠功能已改名区分：手机的叫「GPS 导航 / 机型升级」，GaoLLC 的叫「玩家传送 / 等级系统」。</div>
+  </section>
+
+  <section id="s4">
+    <h2><span class="num">04</span>合成与升级链</h2>
+    <h3>基础手机（3×3 工作台）</h3>
+    <p>四角羊毛（任意颜色）、上下铁锭、左右红石粉、正中钻石块。</p>
+
+    <h3>十代机型升级路线</h3>
+    <div class="flow">
+      <span class="node">I</span><span class="arr">→</span>
+      <span class="node">II</span><span class="arr">→</span>
+      <span class="node">III</span><span class="arr">→</span>
+      <span class="node">IV</span><span class="arr">→</span>
+      <span class="node">V</span><span class="arr">→</span>
+      <span class="node">VI</span><span class="arr">→</span>
+      <span class="node">VII</span><span class="arr">→</span>
+      <span class="node">VIII</span><span class="arr">→</span>
+      <span class="node">X</span><span class="arr">→</span>
+      <span class="node">Pro Max</span>
+    </div>
+    <p>举报次数随之提升：10 → 20 → 30 → 50 → 50 → 60 → 70 → 80 → 90 → 无限</p>
+
+    <h3>等级系统（与机型升级是两套）</h3>
+    <ul>
+      <li><strong>9 级</strong>：背包备 8 个钻石，脚下地面放 1 个信标（代表手机），输入 <code>!level up</code> 检测，消耗 8 钻石升级。</li>
+      <li><strong>10 级（满级）</strong>：消耗 1 个下界之星。</li>
+    </ul>
+    <div class="note">钻石和手机都是物品、无法摆在地面，所以"8 钻石围圈 + 中间放手机"实现为"背包 8 钻石 + 脚下信标代表手机"。</div>
+  </section>
+
+  <section id="s5">
+    <h2><span class="num">05</span>投稿与排错</h2>
+    <h3>用哪个包</h3>
+    <table>
+      <tr><th>文件</th><th>用途</th></tr>
+      <tr><td><code>PhoneMod_投稿包.zip</code></td><td>开发者平台投稿用（顶层 phone_behavior/ + phone_resource/）</td></tr>
+      <tr><td><code>PhoneMod.mcaddon</code></td><td>本地导入测试用</td></tr>
+    </table>
+
+    <h3>审核报错复盘（已全部修复）</h3>
+    <table>
+      <tr><th>错误</th><th>原因与解决</th></tr>
+      <tr><td>错误码 38</td><td>战利品表 JSON 缺顶层 type，已移除战利品表</td></tr>
+      <tr><td>错误码 6</td><td>上传包目录结构错，投稿包已按网易规范重建（无保留字、含 entities/）</td></tr>
+      <tr><td>上架失败·数据错误</td><td>表单文案含 emoji/特殊符号，已全改纯文字</td></tr>
+      <tr><td>错误码 43</td><td>manifest 写了 script 模块（SAPI）。Python 脚本靠目录约定识别，manifest 只留 type:data</td></tr>
+    </table>
+
+    <h3>当前投稿状态</h3>
+    <div class="bar"><i style="width:88%"></i></div>
+    <p style="font-size:13px;color:var(--muted);">技术层面问题已全部修复，包体结构、JSON、Python 语法、manifest 均校验通过。剩余为游戏内功能自测与平台人工审核（约 3 个工作日）。</p>
+
+    <h3>提交前自查</h3>
+    <ul>
+      <li>先在游戏里测：右键弹界面、识别报 ID、工作台合成炎币、商城三种支付、等级升级。</li>
+      <li>手机端单独测：iOS/Android 大小写敏感，资源文件名统一小写。</li>
+      <li>表单文案全纯文字，简介 82 字（限 100）。</li>
+      <li>定价钻石 300（上线前 90 天玩法类最低 100）。</li>
+      <li>过审后需再点"组件上架"，上架后有 3 天冷却期。</li>
+    </ul>
+  </section>
+
+  <section id="s6">
+    <h2><span class="num">06</span>技术说明</h2>
+    <div class="grid">
+      <div class="card"><h4>零后端</h4><p>所有脚本只 import math / time / random / json 与网易 SDK。无 http、socket、requests 等网络调用。炎币是物品，等级/标点/刷新次数存 ExtraData。</p></div>
+      <div class="card"><h4>Mod SDK（Python）</h4><p>原 GaoLLC 是 JavaScript（SAPI）组件，账号无 SAPI 权限。已全部用 Python 重写，manifest 只有 type:data。</p></div>
+      <div class="card"><h4>双保险</h4><p>准星射线：官方接口失败自动切数学射线。按钮回调：JSON 映射 + Python 回调，0.6 秒去抖。</p></div>
+      <div class="card"><h4>可重生成</h4><p>改 templates/ 下脚本与 UI，跑 build_ui.py 再跑 _generate_phone_mod.py，即可重建全部产物与两个包。</p></div>
+    </div>
+
+    <h3>交付文件</h3>
+    <table>
+      <tr><th>文件</th><th>说明</th></tr>
+      <tr><td><code>PhoneMod_投稿包.zip</code> / <code>PhoneMod.mcaddon</code></td><td>投稿包 / 本地测试包</td></tr>
+      <tr><td><code>手机模组说明.md</code></td><td>安装、功能、合成链、二次开发、排错</td></tr>
+      <tr><td><code>手机模组投稿清单.md</code></td><td>逐栏填写答案 + 自查清单</td></tr>
+      <tr><td><code>templates/</code> + <code>_generate_phone_mod.py</code></td><td>源文件与一键生成脚本</td></tr>
+      <tr><td><code>宣传图/</code></td><td>6 张投稿宣传图（icon / POS / 轮播图）</td></tr>
+    </table>
+  </section>
+
+  <div class="foot">MC智能手机 + GaoLLC Workshop · V0.4.8 更新汇总 · 由 WorkBuddy 整理</div>
+
+</div>
 </body>
 </html>
